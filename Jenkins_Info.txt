@@ -1,0 +1,128 @@
+1. Jenkins default username is admin and pwd can be found at:
+sudo cat /Users/Shared/Jenkins/Home/secrets/initialAdminPassword
+2c7c9bfef9944976832050d28334c62a
+
+2. To tell Jenkins to restart or reload its configuration:
+In browser url use: localhost:8080/restart
+
+3. To start/stop Jenkins demon/service, go to terminal:
+To Stop Jenkins: sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+                 sudo launchctl stop /Library/LaunchDaemons/org.jenkins-ci.plist
+
+To start Jenkins: sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist
+                 sudo launchctl start /Library/LaunchDaemons/org.jenkins-ci.plist
+
+4. To upgrade Jenkins: Download new war file.
+sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+cd /Applications/Jenkins
+sudo mv jenkins.war jenkins.war-backup
+sudo mv ~/Downloads/jenkins.war .
+sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist
+sudo rm jenkins.war-backup
+
+5. To find suitable jenkins plugin
+https://plugins.jenkins.io/
+
+6. To find java path in mac:
+abhay$ /usr/libexec/java_home 
+/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home
+abhay$ which git
+/usr/local/bin/git
+base) Abhays-MBP:Documents abhay$ sudo chmod -R 777 ~/Documents/
+(base) Abhays-MBP:Documents abhay$ sudo -iu jenkins 
+Abhays-MBP:~ jenkins$ /Users/abhay/Documents/apache-maven-3.6.2/bin/mvn -
+
+6. Global tools configuration is used to configure git, maven, jdk path.
+
+7. To run jenkins war file directly use:
+java -jar jenkins.war --httpPort=8080
+
+8. Navigate to the below URL to download the war file http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+9. Windows based package manager:
+chocolatey.org
+choco - to test its installed.
+choco install git
+choco install maven
+
+10. Use CRON expressions to schedule a job
+Each line consists of 5 fields separated by TAB or whitespace
+MINUTE HOUR DOM MONTH DOW
+
+To specify multiple values, use the following:
+* for all valid values
+0-9 specify a range of values
+2,3,4,5 to enumerate multiple values
+
+Use Hash system for automatic balancing
+Use H H * * * instead of 0 0 * * *
+
+Use aliases like @yearly, @monthly, @weekly
+@hourly is the same as H * * * *
+
+11. Parameterizing build
+>Allow you to prompt users for one or more inputs
+>Each parameter has a name and a value
+>Can be accessed using $paramater or %parameter%
+>‘Build Now’ will be replaced by ‘Build with Parameters’
+
+Types of Parameters:
+Boolean Parameter
+Choice Parameter
+Credentials Parameter
+File Parameter
+List Subversion tags
+Password Parameter
+Run Parameter
+String Parameter
+
+12. Use 'Role based Authorisation Strategy' plugin to manage roles.
+
+13. Entire list of Global variables are accessible from http://localhost:8080/pipeline-syntax/globals#env
+Jenkins exposes environment variable through the variable "env".
+pipeline {
+   agent any
+
+   stages {
+      stage('Stage 1') {
+         steps {
+            echo "Build ID: ${env.BUILD_ID}, Jenkins Url: ${env.JENKINS_URL}"
+         }
+      }
+   }
+}
+
+14. Setting Environment variables:
+A) Declarative pipeline:
+   use 'environment' directive
+   'environment' directive in top level pipeline block will apply to all steps.
+   'environment' directive within a stage will only apply within the stage.
+
+B) Scripted Pipeline:
+   Use 'withEnv' step
+   
+Example:
+pipeline {
+   agent any
+   environment {
+       mainenv = 'test'
+   }
+
+   stages {
+      stage('Stage 1') {
+        environment {
+            subenv = 'test1'
+        }
+         steps {
+            echo mainenv
+            echo subenv
+         }
+      }
+      stage('Stage 2') {
+         steps {
+            echo mainenv
+            echo subenv
+         }
+      }
+   }
+}
