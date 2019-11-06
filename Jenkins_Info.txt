@@ -126,3 +126,23 @@ pipeline {
       }
    }
 }
+
+15. Install "Blue Ocean" plugin for awesome UI experience and pipeline management.
+
+16. Jenkins in Docker:
+docker pull jenkins
+docker images
+docker container ls 
+docker run -p 8080:8080 -p 50000:50000 jenkins
+
+Persisting Jenkins data in Volume:
+docker volume create volume1
+docker volume inspect volume1
+docker run -p 8080:8080 -p 50000:50000 -v volume1:/var/jenkins_home jenkins
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+
+Running multiple Jenkins Instances in Docker:
+docker volume create volume2
+docker volume ls
+docker run -p 8080:8080 -p 50000:50000 -v volume1:/var/jenkins_home jenkins
