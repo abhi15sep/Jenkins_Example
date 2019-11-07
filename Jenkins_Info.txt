@@ -146,3 +146,27 @@ Running multiple Jenkins Instances in Docker:
 docker volume create volume2
 docker volume ls
 docker run -p 8080:8080 -p 50000:50000 -v volume1:/var/jenkins_home jenkins
+
+17. Jenkins Plugin:
+Build Monitor view Plugin : Provides highly visible view of jobs.
+Catlight: A notification app for developers. Its not a Jenkins plugin, It can be downloaded from https://catlight.io/.
+Jenkins CLI: 
+      Go To configure global security and under Authorization, select Anyone can do anything.
+      java -jar jenkins-cli.jar -s http://localhost:8080/ build Pipeline1 -f
+      java -jar jenkins-cli.jar -s http://localhost:8080/ build Pipeline1 -v -s
+      Go To configure global security and under Authorization, select Logged-in users can do 
+      java -jar jenkins-cli.jar -s http://localhost:8080/ build Pipeline1 -f --username abhay --password
+      java -jar jenkins-cli.jar -s http://localhost:8080/ build PipelineParameterised -f -p env="Dev" -p os="Windows"
+Jenkins Multibranch Pipeline: Implements different Jenkinsfile for different branches.
+      Here 	Pipeline: Multibranch plugin is used.
+Integrating Jenkins with slack: slack notification plugin
+      Install slack notification plugin
+      Go to configure syystem to configure slack. > Global slack notifier settings.
+      Create a new channel in slack.
+      You need to add app to channel by going to settings. Select Jenkins CI and Install.
+Build History Metrics Plugin: We can find
+      Mean time to failure, Mean time to recover.
+      Also try global-build-stats plugin.
+
+
+
