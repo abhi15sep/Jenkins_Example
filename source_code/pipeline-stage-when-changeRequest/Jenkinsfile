@@ -1,0 +1,37 @@
+Multipipeline Job: Branch Sources > github > Credentials >owner > repository > Save.
+==================
+pipeline {
+    agent any
+	
+    stages {
+        stage('Build') {
+		
+			when{
+				changeRequest title:"when-pr"
+			}
+		
+            steps {                
+                echo 'Hello World changing request'
+            }
+        }
+    }
+}
+========================
+Executed when there is a pull request.
+
+pipeline {
+    agent any
+	
+    stages {
+        stage('Build') {
+		
+			when{
+				changeRequest()
+			}
+		
+            steps {                
+                echo 'Hello World changing request'
+            }
+        }
+    }
+}

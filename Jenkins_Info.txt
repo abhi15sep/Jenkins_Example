@@ -168,5 +168,11 @@ Build History Metrics Plugin: We can find
       Mean time to failure, Mean time to recover.
       Also try global-build-stats plugin.
 
-
+18. To load library in Jenkins:
+Configure system > Global pipeline library > Add > Library:
+                                                   Name: pipeline-shared-lib 
+                                                   default version: master
+                                                   Reterival method: Modern SCM
+                                                   Then fill Credentials, owner & repositories.
+                                                   Apply.
 

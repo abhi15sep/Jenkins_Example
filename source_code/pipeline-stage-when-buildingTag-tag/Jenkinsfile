@@ -1,0 +1,36 @@
+Multibranch pipeline: Also select discover tag in branch sources > github. > Add > siscover tag.
+In master banch > git tag release-1.0 > git push origin release-1.0
+pipeline {
+    agent any
+	
+    stages {
+        stage('Build') {
+		
+			when{
+				tag "release-*"
+			}
+		
+            steps {                
+                echo 'Hello World building tag'
+            }
+        }
+    }
+}
+
+===========================================
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+
+			when{
+				buildingTag()
+			}
+
+            steps {                
+                echo 'Hello World building tag'
+            }
+        }
+    }
+} 

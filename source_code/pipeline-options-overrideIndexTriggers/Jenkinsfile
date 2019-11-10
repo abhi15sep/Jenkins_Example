@@ -1,0 +1,16 @@
+Multibranch pipeline: Not trigger the build when new commit is done, if value is false.
+Under ScanMultibranch pipeline Trigger > Periodically if not otherwise run > Select interval.
+pipeline {	
+    agent any	
+    options {	
+		timestamps()
+		overrideIndexTriggers(true)
+    }
+    stages {	
+        stage('Build') {	
+            steps {
+                echo 'Hello World 5'
+            }	
+        }	
+    }	
+}	

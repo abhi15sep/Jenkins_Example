@@ -1,0 +1,41 @@
+Multibranchpipeline: If agent is set any at pipeline level then skipDefaultCheckout at stage level will not have any effect,
+ unless we specify options at pipeline level
+=====================
+pipeline {
+    agent none
+    
+    stages {
+        stage('Build') {
+			agent any
+			options { 
+				skipDefaultCheckout() 
+			}
+
+            steps {                
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+=========================================
+
+pipeline {
+    agent any
+    options { 
+	skipDefaultCheckout() 
+    }
+
+    stages {
+        stage('Build') {
+			agent any
+			options { 
+				skipDefaultCheckout() 
+			}
+
+            steps {                
+                echo 'Hello World'
+            }
+        }
+    }
+}

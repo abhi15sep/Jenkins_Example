@@ -1,0 +1,36 @@
+Multipipeline project: It executes when a file being commited have a certain regular expression.
+pipeline {
+    agent any
+	
+    stages {
+        stage('Build') {
+		
+			when{
+				changeset glob: "*WORLD.js", caseSensitive: true
+			}
+		
+            steps {                
+                echo 'Hello World changeset JS'
+            }
+        }
+    }
+}
+
+=====================================
+//looking for just javascript files
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+
+			when{
+				changeset glob: "*.js"
+			}
+
+            steps {                
+                echo 'Hello World changeset JS'
+            }
+        }
+    }
+} 

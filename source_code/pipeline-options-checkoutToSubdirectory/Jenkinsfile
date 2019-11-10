@@ -1,0 +1,14 @@
+Multibranch pipeline: Checkout code to a subdirectory.
+pipeline {	
+    agent any	
+	options { 
+		checkoutToSubdirectory('someSubDir') 
+	}
+    stages {	
+        stage('Build') {	
+            steps {                	
+                echo 'Hello World'	
+            }	
+        }	
+    }	
+}	

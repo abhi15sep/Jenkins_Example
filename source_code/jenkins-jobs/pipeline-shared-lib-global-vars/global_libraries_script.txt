@@ -13,3 +13,58 @@ pipeline {
     }
    
 }
+
+========================================
+To load library from other branch. example dev
+@Library("pipeline-shared-lib@dev") _
+
+pipeline {
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                script{
+                    swissknife.printName 'John'
+                }
+            }         
+        }
+    }
+   
+}
+=========================================
+To use multiple shared Library
+
+@Library(['pipeline-shared-lib', 'pipeline-shared-other-lib']) _
+
+pipeline {
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                script{
+                    swissknife.printName 'John'
+                }
+            }         
+        }
+    }
+   
+}
+
+============================================
+To load library dynamically at runtime:
+
+@Library "pipeline-shared-lib@dev" _
+
+pipeline {
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                script{
+                    swissknife.printName 'John'
+                }
+            }         
+        }
+    }
+   
+}
